@@ -1,7 +1,7 @@
 ---
 name: BUG
 about: Bug 발생시 작성
-title: "[BUG]"
+title: 'Bug: '
 labels: bug
 assignees: JuneK3
 

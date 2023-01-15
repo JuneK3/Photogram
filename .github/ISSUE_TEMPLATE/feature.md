@@ -1,7 +1,7 @@
 ---
 name: FEATURE
 about: Feature 작업사항 입력
-title: "[FEATURE]"
+title: 'Feat: '
 labels: feature
 assignees: JuneK3
 

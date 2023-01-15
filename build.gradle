@@ -20,17 +20,28 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    // security
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.security:spring-security-taglibs'
+    // oauth2
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
     // jpa & DB
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.mariadb.jdbc:mariadb-java-client'
     runtimeOnly 'com.h2database:h2'
+    // mapping dto for query results
+    implementation 'org.qlrm:qlrm'
     // jsp
     implementation 'javax.servlet:jstl'
     implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
     // lombok
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
+    // devtools
+    implementation 'org.springframework.boot:spring-boot-devtools'
     // test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
 }
 
 tasks.named('test') {

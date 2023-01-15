@@ -14,25 +14,25 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 public class User {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-	private String username;
-	private String password;
-	private String name;
-	private String website; // 웹사이트
-	private String bio; // 자기소개
-	private String email;
-	private String phone;
-	private String gender;
-	private String profileImageUrl; // 사진
-	private String role; // 권한
+    private String username;
+    private String password;
+    private String name;
+    private String website; // 웹사이트
+    private String bio; // 자기소개
+    private String email;
+    private String phone;
+    private String gender;
+    private String profileImageUrl; // 사진
+    private String role; // 권한
 
-	private LocalDateTime createdAt;
+    private LocalDateTime createdAt;
 
-	@PrePersist // INSERT 직전에 실행
-	public void createdAt() {
-		this.createdAt = LocalDateTime.now();
-	}
+    @PrePersist // INSERT 직전에 실행
+    public void createdAt() {
+        this.createdAt = LocalDateTime.now();
+    }
 }

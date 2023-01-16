@@ -18,13 +18,21 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(unique = true)
+    @Column(length = 20, unique = true)
     private String username;
+
+    @Column(nullable = false)
     private String password;
+
+    @Column(nullable = false)
     private String name;
+
+    @Column(nullable = false)
+    private String email;
+
     private String website; // 웹사이트
     private String bio; // 자기소개
-    private String email;
+
     private String phone;
     private String gender;
     private String profileImageUrl; // 사진

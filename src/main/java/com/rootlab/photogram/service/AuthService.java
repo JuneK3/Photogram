@@ -14,13 +14,11 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
 
     public User saveUser(User user) {
-
         String password = passwordEncoder.encode(user.getPassword());
         user.setPassword(password);
         user.setRole("ROLE_USER");
         User savedUser = userRepository.save(user);
         return savedUser;
     }
-
 
 }

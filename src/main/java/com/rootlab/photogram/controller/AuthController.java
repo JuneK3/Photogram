@@ -1,16 +1,23 @@
 package com.rootlab.photogram.controller;
 
+import com.rootlab.photogram.domain.User;
 import com.rootlab.photogram.dto.auth.SignUpDto;
+import com.rootlab.photogram.service.AuthService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-@Controller
 @Slf4j
+@Controller
+@RequiredArgsConstructor
 public class AuthController {
 
+    private final AuthService authService;
+
     @GetMapping("/auth/signup")
+
     public String signUpPage() {
         return "auth/signup";
     }
@@ -23,6 +30,11 @@ public class AuthController {
 
         log.info("POST /auth/signup 요청에 signUp 실행됨");
         log.info(signUpDto.toString());
+
+        User user = signUpDto.toEntity();
+        authService.saveUser(user);
+
+//        return "redirect:/auth/signin";
         return "auth/signin";
     }
 

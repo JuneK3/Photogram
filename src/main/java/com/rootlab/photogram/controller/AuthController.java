@@ -2,6 +2,7 @@ package com.rootlab.photogram.controller;
 
 import com.rootlab.photogram.domain.User;
 import com.rootlab.photogram.dto.auth.SignUpDto;
+import com.rootlab.photogram.handler.exception.CustomValidationException;
 import com.rootlab.photogram.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,21 +30,19 @@ public class AuthController {
     }
 
     @PostMapping("/auth/signup")
-    public String signUp(@Valid SignUpDto signUpDto, BindingResult bindingResult) {
+    public String signUp(@Valid SignUpDto signUpDto, BindingResult bindingResult)
+            throws CustomValidationException {
 
         if (bindingResult.hasErrors()) {
             Map<String, String> errorMap = new HashMap<>();
             for (FieldError error : bindingResult.getFieldErrors()) {
                 errorMap.put(error.getField(), error.getDefaultMessage());
-                log.info(error.getField() + " : " + error.getDefaultMessage());
             }
+            throw new CustomValidationException("유효성 검사 실패", errorMap);
         }
 
         // @RequestBody가 없기 때문에 request body의 데이터로 dto 객체를 초기화하지 못함
         // x-www-form-urlencoded 방식으로만 dto 객체에 값을 넣어줄 수 있음
-
-        log.info("POST /auth/signup 요청에 signUp 실행됨");
-        log.info(signUpDto.toString());
 
         User user = signUpDto.toEntity();
         authService.saveUser(user);

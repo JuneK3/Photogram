@@ -1,6 +1,6 @@
 function update(userId, event) {
-	event.preventDefault(); // 폼태그 액션 막기
-	let data = $("#profileUpdate").serialize(); // key=value
+	event.preventDefault();
+	let data = $("#profileUpdate").serialize();
 
 	$.ajax({
 		type: "put",
@@ -9,13 +9,12 @@ function update(userId, event) {
 		contentType: "application/x-www-form-urlencoded; charset=utf-8",
 		dataType: "json"
 	}).done(res => { // HttpStatus 200 OK
-		// console.log("성공", res);
 		location.href = `/user/${userId}`;
 	}).fail(error => {
-		if (error.data == null) {
+		if (error.responseJSON.payload == null) {
 			alert(error.responseJSON.message);
 		} else {
-			alert(JSON.stringify(error.responseJSON.data));
+			alert(JSON.stringify(error.responseJSON.payload));
 		}
 	});
 }

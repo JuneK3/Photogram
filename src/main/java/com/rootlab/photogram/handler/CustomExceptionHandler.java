@@ -2,6 +2,7 @@ package com.rootlab.photogram.handler;
 
 import com.rootlab.photogram.dto.CommonResponseDto;
 import com.rootlab.photogram.handler.exception.CustomApiException;
+import com.rootlab.photogram.handler.exception.CustomValidationApiException;
 import com.rootlab.photogram.handler.exception.CustomValidationException;
 import com.rootlab.photogram.util.GoBackToPreviousPage;
 import org.springframework.http.HttpStatus;
@@ -16,12 +17,16 @@ public class CustomExceptionHandler {
 
     @ExceptionHandler(CustomValidationException.class)
     public String validationExceptionHandler(CustomValidationException e) {
-//        return new CommonResponseDto<>(-1, e.getMessage(), e.getErrorMap());
         return GoBackToPreviousPage.alert(e.getErrorMap().toString());
     }
 
+    @ExceptionHandler(CustomValidationApiException.class)
+    public ResponseEntity<?> validationApiExceptionHandler(CustomValidationApiException e) {
+        return new ResponseEntity<>(new CommonResponseDto<>(-1, e.getMessage(), e.getErrorMap()), HttpStatus.BAD_REQUEST);
+    }
+
     @ExceptionHandler(CustomApiException.class)
-    public ResponseEntity<?> apiException(CustomApiException e) {
+    public ResponseEntity<?> apiExceptionHandler(CustomApiException e) {
         return new ResponseEntity<>(new CommonResponseDto<>(-1, e.getMessage(), null), HttpStatus.BAD_REQUEST);
     }
 

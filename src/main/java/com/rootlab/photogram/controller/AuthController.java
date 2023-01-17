@@ -26,6 +26,12 @@ public class AuthController {
         return "auth/signup";
     }
 
+    @GetMapping("/auth/signin")
+    public String signInPage() {
+        return "auth/signin";
+    }
+
+
     @PostMapping("/auth/signup")
     public String signUp(@Valid SignUpDto signUpDto, BindingResult bindingResult)
             throws CustomValidationException {
@@ -42,7 +48,8 @@ public class AuthController {
 
         User user = signUpDto.toEntity();
         authService.saveUser(user);
-        return "auth/signin";
+//        return "auth/signin";
+        return "redirect:/auth/signin";
     }
 
 }

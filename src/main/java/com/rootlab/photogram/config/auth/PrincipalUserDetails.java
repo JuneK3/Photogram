@@ -1,12 +1,14 @@
 package com.rootlab.photogram.config.auth;
 
 import com.rootlab.photogram.domain.User;
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
+@Data
 public class PrincipalUserDetails implements UserDetails {
 
     private final User user;
@@ -18,7 +20,7 @@ public class PrincipalUserDetails implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<GrantedAuthority> roles = new ArrayList<>();
-        roles.add(() -> user.getRole());
+        roles.add(user::getRole);
         return roles;
     }
 

@@ -21,11 +21,11 @@ public class UserController {
     @GetMapping("/user/{id}/update")
     public String update(@PathVariable Long id,
                          @AuthenticationPrincipal PrincipalUserDetails userDetails) {
-//        log.info("[UserController] @AuthenticationPrincipal: " + userDetails); // PrincipalUserDetails
+        log.info("[UserController] @AuthenticationPrincipal: " + userDetails); // PrincipalUserDetails
 //        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        log.info("[UserController] authentication.getPrincipal: " + authentication.getPrincipal()); // PrincipalUserDetails
+//        PrincipalUserDetails principal = (PrincipalUserDetails) authentication.getPrincipal();
+//        log.info("[UserController] authentication.getPrincipal: " + principal.getUser()); // PrincipalUserDetails
 //        log.info("[UserController] authentication.getDetails(): " + authentication.getDetails()); // WebAuthenticationDetails
-
         return "user/update";
     }
 

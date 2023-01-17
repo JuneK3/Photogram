@@ -22,6 +22,7 @@ spring:
     open-in-view: true # osiv 설정, default = true
     hibernate:
       ddl-auto: create
+#      ddl-auto: update
     show-sql: true
     properties:
       hibernate:
@@ -32,3 +33,12 @@ spring:
     user:
       name: test
       password: 1234
+
+  devtools:
+    restart:
+      enabled: false
+#      enabled: true
+    livereload:
+      enabled: false
+#      enabled: true
+

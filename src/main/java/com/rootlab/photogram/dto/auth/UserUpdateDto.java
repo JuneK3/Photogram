@@ -14,12 +14,12 @@ public class UserUpdateDto {
 
     public User toEntity() {
         return User.builder()
-                .username(name)
+                .name(name)
                 .password(password)
-                .email(website)
-                .name(bio)
-                .name(phone)
-                .name(gender)
+                .website(website)
+                .bio(bio)
+                .phone(phone)
+                .gender(gender)
                 .build();
     }
 }

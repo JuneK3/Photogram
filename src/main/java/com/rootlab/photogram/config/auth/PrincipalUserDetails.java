@@ -11,7 +11,7 @@ import java.util.Collection;
 @Data
 public class PrincipalUserDetails implements UserDetails {
 
-    private final User user;
+    private User user;
 
     public PrincipalUserDetails(User user) {
         this.user = user;

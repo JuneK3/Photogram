@@ -20,7 +20,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //        super.configure(http); // 기존 security가 제공하는 기능들 비활성화
 //        http.csrf().disable();
         http.authorizeRequests()
-                .antMatchers("/", "/user/**", "/image/**", "/subscribe/**", "/comment/**")
+                .antMatchers("/", "/user/**", "/image/**", "/subscribe/**", "/comment/**", "/api/**")
                 .authenticated()
                 .anyRequest().permitAll()
                 .and()

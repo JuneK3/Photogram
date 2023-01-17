@@ -36,8 +36,6 @@ public class AuthController {
     public String signUp(@Valid SignUpDto signUpDto, BindingResult bindingResult)
             throws CustomValidationException {
 
-        // x-www-form-urlencoded
-
         if (bindingResult.hasErrors()) {
             Map<String, String> errorMap = new HashMap<>();
             for (FieldError error : bindingResult.getFieldErrors()) {
@@ -48,7 +46,6 @@ public class AuthController {
 
         User user = signUpDto.toEntity();
         authService.saveUser(user);
-//        return "auth/signin";
         return "redirect:/auth/signin";
     }
 

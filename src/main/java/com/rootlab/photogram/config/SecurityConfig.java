@@ -28,6 +28,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/auth/signin") // GET
                 .loginProcessingUrl("/auth/signin") // POST UserDetailsService의 loadUserByUsername 호출
                 .defaultSuccessUrl("/");
-
     }
 }

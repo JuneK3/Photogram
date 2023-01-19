@@ -1,5 +1,6 @@
 package com.rootlab.photogram.service;
 
+import com.rootlab.photogram.handler.exception.CustomApiException;
 import com.rootlab.photogram.repository.SubscribeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,11 @@ public class SubscribeService {
 
     @Transactional
     public void subscribe(Long fromUserId, Long toUserId) {
-        subscribeRepository.mSubscribe(fromUserId, toUserId);
+        try {
+            subscribeRepository.mSubscribe(fromUserId, toUserId);
+        } catch (Exception e) {
+            throw new CustomApiException("이미 구독하였습니다.");
+        }
     }
 
     @Transactional

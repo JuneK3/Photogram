@@ -26,6 +26,6 @@ public class PrincipalDetailsService implements UserDetailsService {
         log.info("[PrincipalDetailsService] loadUserByUsername 호출");
 //        User user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("유저 정보가 존재하지 않습니다."));
         User user = userRepository.findByUsername(username);
-        return new PrincipalUserDetails(user);
+        return new PrincipalDetails(user);
     }
 }

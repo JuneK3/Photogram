@@ -1,6 +1,7 @@
 package com.rootlab.photogram.service;
 
 import com.rootlab.photogram.config.auth.PrincipalDetails;
+import com.rootlab.photogram.domain.Image;
 import com.rootlab.photogram.dto.ImageUploadDto;
 import com.rootlab.photogram.repository.ImageRepository;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +34,9 @@ public class ImageService {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        Image image = imageUploadDto.toEntity(filename, principalDetails.getUser());
+        imageRepository.save(image);
 
     }
 }

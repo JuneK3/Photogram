@@ -2,6 +2,7 @@ package com.rootlab.photogram.controller;
 
 import com.rootlab.photogram.config.auth.PrincipalDetails;
 import com.rootlab.photogram.dto.ImageUploadDto;
+import com.rootlab.photogram.handler.exception.CustomValidationException;
 import com.rootlab.photogram.service.ImageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -32,7 +33,12 @@ public class ImageController {
 
     @PostMapping("/image")
     public String imageUpload(ImageUploadDto imageUploadDto,
-                              @AuthenticationPrincipal PrincipalDetails principalDetails) {
+                              @AuthenticationPrincipal PrincipalDetails principalDetails) throws CustomValidationException {
+
+        if(imageUploadDto.getFile().isEmpty()) {
+            throw new CustomValidationException("이미지가 첨부되지 않았습니다.", null);
+        }
+
         imageService.uplodaImage(imageUploadDto, principalDetails);
         return "redirect:/user/" + principalDetails.getUser().getId();
     }

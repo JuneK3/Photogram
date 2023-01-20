@@ -17,6 +17,10 @@ public class CustomExceptionHandler {
 
     @ExceptionHandler(CustomValidationException.class)
     public String validationExceptionHandler(CustomValidationException e) {
+
+        if (e.getErrorMap() == null) {
+            return GoBackToPreviousPage.alert(e.getMessage());
+        }
         return GoBackToPreviousPage.alert(e.getErrorMap().toString());
     }
 

@@ -44,6 +44,5 @@ spring:
       enabled: false
 #      enabled: true
 
-#logging:
-#  level:
-#    root: debug
+file:
+  path: C:/Users/rlaru/dev/upload/

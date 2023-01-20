@@ -35,8 +35,8 @@ public class UserService {
         return savedUser;
     }
 
-    public void getUserProfile(Long id) {
+    public User getUserProfile(Long id) {
         User user = userRepository.findById(id).orElseThrow(() -> new CustomException("해당 프로필 페이지는 없는 페이지입니다."));
-        user.getImages().get(0);
+        return user;
     }
 }

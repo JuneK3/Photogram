@@ -1,6 +1,7 @@
 package com.rootlab.photogram.controller;
 
 import com.rootlab.photogram.config.auth.PrincipalDetails;
+import com.rootlab.photogram.domain.User;
 import com.rootlab.photogram.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -16,9 +17,9 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/user/{id}")
-    public String story(@PathVariable Long id, Model model) {
-        userService.getUserProfile(id);
-        model.addAttribute("images", null);
+    public String profile(@PathVariable Long id, Model model) {
+        User user = userService.getUserProfile(id);
+        model.addAttribute("user", user);
         return "user/profile";
     }
 

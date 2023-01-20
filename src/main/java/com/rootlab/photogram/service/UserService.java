@@ -7,8 +7,7 @@ import com.rootlab.photogram.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -35,6 +34,7 @@ public class UserService {
         return savedUser;
     }
 
+    @Transactional(readOnly = true) // 더티체킹x
     public User getUserProfile(Long id) {
         User user = userRepository.findById(id).orElseThrow(() -> new CustomException("해당 프로필 페이지는 없는 페이지입니다."));
         return user;

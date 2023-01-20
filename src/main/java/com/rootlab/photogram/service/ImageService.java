@@ -7,6 +7,7 @@ import com.rootlab.photogram.repository.ImageRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -23,6 +24,7 @@ public class ImageService {
     @Value("${file.path}")
     private String uploadFolder;
 
+    @Transactional
     public void uplodaImage(ImageUploadDto imageUploadDto,
                             PrincipalDetails principalDetails) {
         UUID uuid = UUID.randomUUID();

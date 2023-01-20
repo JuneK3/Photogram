@@ -4,8 +4,7 @@ import com.rootlab.photogram.handler.exception.CustomApiException;
 import com.rootlab.photogram.repository.SubscribeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor

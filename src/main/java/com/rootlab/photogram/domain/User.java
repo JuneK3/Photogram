@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Builder
 @AllArgsConstructor
@@ -44,4 +45,8 @@ public class User {
     public void createdAt() {
         this.createdAt = LocalDateTime.now();
     }
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Image> images;
+
 }

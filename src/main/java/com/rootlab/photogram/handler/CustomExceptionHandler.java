@@ -2,6 +2,7 @@ package com.rootlab.photogram.handler;
 
 import com.rootlab.photogram.dto.CommonResponseDto;
 import com.rootlab.photogram.handler.exception.CustomApiException;
+import com.rootlab.photogram.handler.exception.CustomException;
 import com.rootlab.photogram.handler.exception.CustomValidationApiException;
 import com.rootlab.photogram.handler.exception.CustomValidationException;
 import com.rootlab.photogram.util.GoBackToPreviousPage;
@@ -22,6 +23,11 @@ public class CustomExceptionHandler {
             return GoBackToPreviousPage.alert(e.getMessage());
         }
         return GoBackToPreviousPage.alert(e.getErrorMap().toString());
+    }
+
+    @ExceptionHandler(CustomException.class)
+    public String exceptionHandler(CustomException e) {
+        return GoBackToPreviousPage.alert(e.getMessage());
     }
 
     @ExceptionHandler(CustomValidationApiException.class)

@@ -2,6 +2,7 @@ package com.rootlab.photogram.service;
 
 import com.rootlab.photogram.domain.User;
 import com.rootlab.photogram.handler.exception.CustomApiException;
+import com.rootlab.photogram.handler.exception.CustomException;
 import com.rootlab.photogram.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -32,5 +33,10 @@ public class UserService {
         userEntity.setGender(user.getGender());
         User savedUser = userRepository.save(userEntity);
         return savedUser;
+    }
+
+    public void getUserProfile(Long id) {
+        User user = userRepository.findById(id).orElseThrow(() -> new CustomException("해당 프로필 페이지는 없는 페이지입니다."));
+        user.getImages().get(0);
     }
 }

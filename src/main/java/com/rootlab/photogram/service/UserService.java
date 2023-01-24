@@ -1,6 +1,7 @@
 package com.rootlab.photogram.service;
 
 import com.rootlab.photogram.domain.User;
+import com.rootlab.photogram.dto.user.UserProfileDto;
 import com.rootlab.photogram.handler.exception.CustomApiException;
 import com.rootlab.photogram.handler.exception.CustomException;
 import com.rootlab.photogram.repository.UserRepository;
@@ -35,8 +36,13 @@ public class UserService {
     }
 
     @Transactional(readOnly = true) // 더티체킹x
-    public User getUserProfile(Long id) {
-        User user = userRepository.findById(id).orElseThrow(() -> new CustomException("해당 프로필 페이지는 없는 페이지입니다."));
-        return user;
+    public UserProfileDto getUserProfile(Long pageUserId, Long principalId) {
+        User user = userRepository.findById(pageUserId).orElseThrow(() -> new CustomException("해당 프로필 페이지는 없는 페이지입니다."));
+        UserProfileDto userProfileDto = new UserProfileDto();
+        userProfileDto.setPageOwner(pageUserId == principalId);
+        userProfileDto.setImageCount(user.getImages().size());
+        userProfileDto.setUser(user);
+
+        return userProfileDto;
     }
 }

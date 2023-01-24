@@ -14,6 +14,9 @@ public class SubscribeService {
 
     @Transactional
     public void subscribe(Long fromUserId, Long toUserId) {
+        if (fromUserId.equals(toUserId)) {
+            throw new CustomApiException("유저 자신을 구독할 수 없습니다.");
+        }
         try {
             subscribeRepository.mSubscribe(fromUserId, toUserId);
         } catch (Exception e) {
@@ -23,6 +26,9 @@ public class SubscribeService {
 
     @Transactional
     public void unSubscribe(Long fromUserId, Long toUserId) {
+        if (fromUserId.equals(toUserId)) {
+            throw new CustomApiException("유저 자신을 구독 취소할 수 없습니다.");
+        }
         subscribeRepository.mUnSubscribe(fromUserId, toUserId);
     }
 }

@@ -1,5 +1,6 @@
 package com.rootlab.photogram.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -7,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Builder
 @AllArgsConstructor
@@ -44,4 +46,9 @@ public class User {
     public void createdAt() {
         this.createdAt = LocalDateTime.now();
     }
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = {"user"}) // Image의 User부분을 json으로 파싱하지 않도록 설정
+    private List<Image> images;
+
 }

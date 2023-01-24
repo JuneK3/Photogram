@@ -3,7 +3,7 @@ package com.rootlab.photogram.controller.api;
 import com.rootlab.photogram.config.auth.PrincipalDetails;
 import com.rootlab.photogram.domain.User;
 import com.rootlab.photogram.dto.CommonResponseDto;
-import com.rootlab.photogram.dto.auth.UserUpdateDto;
+import com.rootlab.photogram.dto.user.UserUpdateDto;
 import com.rootlab.photogram.handler.exception.CustomValidationApiException;
 import com.rootlab.photogram.service.UserService;
 import lombok.RequiredArgsConstructor;

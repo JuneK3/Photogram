@@ -1,4 +1,4 @@
-package com.rootlab.photogram.dto.auth;
+package com.rootlab.photogram.dto.user;
 
 import com.rootlab.photogram.domain.User;
 import lombok.Data;

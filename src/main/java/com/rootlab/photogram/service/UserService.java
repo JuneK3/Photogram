@@ -1,13 +1,14 @@
 package com.rootlab.photogram.service;
 
 import com.rootlab.photogram.domain.User;
+import com.rootlab.photogram.dto.user.UserProfileDto;
 import com.rootlab.photogram.handler.exception.CustomApiException;
+import com.rootlab.photogram.handler.exception.CustomException;
 import com.rootlab.photogram.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -32,5 +33,16 @@ public class UserService {
         userEntity.setGender(user.getGender());
         User savedUser = userRepository.save(userEntity);
         return savedUser;
+    }
+
+    @Transactional(readOnly = true) // 더티체킹x
+    public UserProfileDto getUserProfile(Long pageUserId, Long principalId) {
+        User user = userRepository.findById(pageUserId).orElseThrow(() -> new CustomException("해당 프로필 페이지는 없는 페이지입니다."));
+        UserProfileDto userProfileDto = new UserProfileDto();
+        userProfileDto.setPageOwner(pageUserId == principalId);
+        userProfileDto.setImageCount(user.getImages().size());
+        userProfileDto.setUser(user);
+
+        return userProfileDto;
     }
 }

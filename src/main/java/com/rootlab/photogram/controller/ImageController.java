@@ -1,7 +1,7 @@
 package com.rootlab.photogram.controller;
 
 import com.rootlab.photogram.config.auth.PrincipalDetails;
-import com.rootlab.photogram.dto.ImageUploadDto;
+import com.rootlab.photogram.dto.image.ImageUploadDto;
 import com.rootlab.photogram.handler.exception.CustomValidationException;
 import com.rootlab.photogram.service.ImageService;
 import lombok.RequiredArgsConstructor;

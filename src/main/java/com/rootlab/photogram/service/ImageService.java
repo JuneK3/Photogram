@@ -2,7 +2,7 @@ package com.rootlab.photogram.service;
 
 import com.rootlab.photogram.config.auth.PrincipalDetails;
 import com.rootlab.photogram.domain.Image;
-import com.rootlab.photogram.dto.ImageUploadDto;
+import com.rootlab.photogram.dto.image.ImageUploadDto;
 import com.rootlab.photogram.repository.ImageRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;

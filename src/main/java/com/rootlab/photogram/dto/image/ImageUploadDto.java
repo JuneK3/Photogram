@@ -1,4 +1,4 @@
-package com.rootlab.photogram.dto;
+package com.rootlab.photogram.dto.image;
 
 import com.rootlab.photogram.domain.Image;
 import com.rootlab.photogram.domain.User;

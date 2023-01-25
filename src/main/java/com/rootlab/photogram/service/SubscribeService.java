@@ -46,8 +46,8 @@ public class SubscribeService {
         // SubscribeRepository에 작성해도 사용할 수 없음
         StringBuffer sb = new StringBuffer();
         sb.append("select u.id, u.username, u.profileImageUrl, ");
-        sb.append("if ((select 1 from subscribe where fromUserId = ? and toUserId = u.id), 1, 0) SubscribeState, ");
-        sb.append("if ((select u.id = ?), 1, 0) EqualUserState ");
+        sb.append("if ((select 1 from subscribe where fromUserId = ? and toUserId = u.id), 1, 0) subscribeState, ");
+        sb.append("if ((select u.id = ?), 1, 0) equalUserState ");
         sb.append("from User u inner join subscribe s ");
         sb.append("on u.id = s.toUserId ");
         sb.append("where fromUserId = ?");

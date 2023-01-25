@@ -35,8 +35,7 @@
                     <c:otherwise>
                         <c:choose>
                             <c:when test="${profile.subscribeState}">
-                                <button class="cta blue" onclick="toggleSubscribe(${profile.user.id},this)">구독취소
-                                </button>
+                                <button class="cta blue" onclick="toggleSubscribe(${profile.user.id}, this)">구독취소</button>
                             </c:when>
                             <c:otherwise>
                                 <button class="cta" onclick="toggleSubscribe(${profile.user.id}, this)">구독하기</button>

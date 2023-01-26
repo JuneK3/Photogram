@@ -14,9 +14,9 @@ spring:
 
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: ${URL}
-    username: ${USERNAME}
-    password: ${PASSWORD}
+    url: ${MARIADB_URL}
+    username: ${MARIADB_USERNAME}
+    password: ${MARIADB_PASSWORD}
 
   jpa:
     open-in-view: true # osiv 설정, default = true
@@ -36,6 +36,11 @@ spring:
     user:
       name: test
       password: 1234
+
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 5MB
 
   devtools:
     restart:

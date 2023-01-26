@@ -4,6 +4,9 @@ Content-Type: application/x-www-form-urlencoded
 
 username=kim&password=1234
 
+### 메인 스토리 페이지
+GET http://localhost:8081/api/image
+
 ### 로그아웃 1
 POST http://localhost:8081/logout
 

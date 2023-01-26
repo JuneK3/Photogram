@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -39,6 +40,11 @@ public class ImageService {
 
         Image image = imageUploadDto.toEntity(filename, principalDetails.getUser());
         imageRepository.save(image);
+    }
 
+    @Transactional(readOnly = true)
+    public List<Image> getFollowingUserImages(Long principalId) {
+        List<Image> images = imageRepository.mStory(principalId);
+        return images;
     }
 }

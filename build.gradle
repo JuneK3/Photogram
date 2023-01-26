@@ -31,8 +31,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.mariadb.jdbc:mariadb-java-client'
     runtimeOnly 'com.h2database:h2'
-    // mapping dto for query results
-    implementation 'org.qlrm:qlrm'
+    // qlrm
+    implementation 'org.qlrm:qlrm:3.0.4'
     // jsp
     implementation 'javax.servlet:jstl'
     implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'

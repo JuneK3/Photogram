@@ -34,9 +34,5 @@ public class Subscribe {
     private User toUser;
 
     private LocalDateTime createdAt;
-
-    @PrePersist
-    public void createdAt() {
-        this.createdAt = LocalDateTime.now();
-    }
+    
 }

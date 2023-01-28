@@ -35,11 +35,6 @@ public class Likes {
     @ManyToOne
     private User user;
 
-    private LocalDateTime createDate;
-
-    @PrePersist
-    public void createDate() {
-        this.createDate = LocalDateTime.now();
-    }
+    private LocalDateTime createdAt;
 
 }

@@ -1,14 +1,18 @@
 package com.rootlab.photogram.controller;
 
 import com.rootlab.photogram.config.auth.PrincipalDetails;
+import com.rootlab.photogram.domain.Image;
 import com.rootlab.photogram.dto.image.ImageUploadDto;
 import com.rootlab.photogram.handler.exception.CustomValidationException;
 import com.rootlab.photogram.service.ImageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -22,7 +26,9 @@ public class ImageController {
     }
 
     @GetMapping("/image/popular")
-    public String popular() {
+    public String popular(Model model) {
+        List<Image> images = imageService.getPopularImages();
+        model.addAttribute("images", images);
         return "image/popular";
     }
 

@@ -31,4 +31,8 @@ POST http://localhost:8081/api/subscribe/1
 ### 구독하기 2
 POST http://localhost:8081/api/subscribe/2
 
+### 좋아요 1
+POST http://localhost:8081/api/image/4/likes
 
+### 좋아요 취소 1
+DELETE http://localhost:8081/api/image/3/likes

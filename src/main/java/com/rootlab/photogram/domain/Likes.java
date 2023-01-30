@@ -1,5 +1,6 @@
 package com.rootlab.photogram.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,24 +16,25 @@ import java.time.LocalDateTime;
 @Entity
 @Table(uniqueConstraints = {
         @UniqueConstraint(
-                name = "subscribe_unique_constraint",
-                columnNames = {"fromUserId", "toUserId"}
+                name = "likes_unique_constraint",
+                columnNames = {"userId", "imageId"}
         )
 })
-public class Subscribe {
+public class Likes {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
+    @JoinColumn(name = "imageId")
     @ManyToOne
-    @JoinColumn(name = "fromUserId")
-    private User fromUser;
+    private Image image;
 
+    @JsonIgnoreProperties({"images"})
+    @JoinColumn(name = "userId")
     @ManyToOne
-    @JoinColumn(name = "toUserId")
-    private User toUser;
+    private User user;
 
     private LocalDateTime createdAt;
-    
+
 }

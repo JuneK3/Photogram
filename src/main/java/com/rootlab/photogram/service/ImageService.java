@@ -46,6 +46,17 @@ public class ImageService {
     @Transactional(readOnly = true)
     public Page<Image> getFollowingUserImages(Long principalId, Pageable pageable) {
         Page<Image> images = imageRepository.mStory(principalId, pageable);
+
+        images.forEach(image -> {
+            image.setLikeCount(image.getLikes().size());
+            image.getLikes().forEach(like -> {
+                if (like.getUser().getId().equals(principalId)) {
+                    image.setLikeState(true);
+                }
+            });
+
+        });
+
         return images;
     }
 }

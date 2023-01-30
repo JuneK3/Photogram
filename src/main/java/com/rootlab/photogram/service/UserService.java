@@ -53,6 +53,8 @@ public class UserService {
                 .subscribeCount(subscribeCount)
                 .build();
 
+        user.getImages().forEach(image -> image.setLikeCount(image.getLikes().size()));
+
         return userProfileDto;
     }
 }

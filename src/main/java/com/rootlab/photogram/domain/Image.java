@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Builder
 @AllArgsConstructor
@@ -27,6 +28,16 @@ public class Image {
     @JoinColumn(name = "userId")
     @JsonIgnoreProperties(value = {"images"})
     private User user;
+
+    @OneToMany(mappedBy = "image")
+    @JsonIgnoreProperties(value = {"image"})
+    private List<Likes> likes;
+
+    @Transient // DB에 칼럼이 만들어지지 않는다.
+    private boolean likeState;
+
+    @Transient
+    private int likeCount;
 
     private LocalDateTime createdAt;
 

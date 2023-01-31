@@ -8,47 +8,33 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Entity
-public class Image {
-
+public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String caption;
-    private String imageUrl;
+    @Column(length = 100, nullable = false)
+    private String content;
 
     @ManyToOne
     @JoinColumn(name = "userId")
     @JsonIgnoreProperties(value = {"images"})
     private User user;
 
-    @OneToMany(mappedBy = "image")
-    @JsonIgnoreProperties(value = {"image"})
-    private List<Likes> likes;
-
-    @Transient // DB에 칼럼이 만들어지지 않는다.
-    private boolean likeState;
-
-    @Transient
-    private int likeCount;
-
-    @OrderBy("id DESC")
-    @OneToMany(mappedBy = "image")
-    @JsonIgnoreProperties(value = {"image"})
-    private List<Comment> comments;
+    @ManyToOne
+    @JoinColumn(name = "imageId")
+    private Image image;
 
     private LocalDateTime createdAt;
 
-    @PrePersist
+    @PrePersist // INSERT 직전에 실행
     public void createdAt() {
         this.createdAt = LocalDateTime.now();
     }
-
 }

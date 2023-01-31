@@ -41,6 +41,10 @@ public class User {
     private String profileImageUrl; // 사진
     private String role; // 권한
 
+    @OneToMany(mappedBy = "user")
+    @JsonIgnoreProperties(value = {"user"}) // Image의 User부분을 json으로 파싱하지 않도록 설정
+    private List<Image> images;
+
     private LocalDateTime createdAt;
 
     @PrePersist // INSERT 직전에 실행
@@ -48,8 +52,22 @@ public class User {
         this.createdAt = LocalDateTime.now();
     }
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = {"user"}) // Image의 User부분을 json으로 파싱하지 않도록 설정
-    private List<Image> images;
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", website='" + website + '\'' +
+                ", bio='" + bio + '\'' +
+                ", phone='" + phone + '\'' +
+                ", gender='" + gender + '\'' +
+                ", profileImageUrl='" + profileImageUrl + '\'' +
+                ", role='" + role + '\'' +
+                ", createdAt=" + createdAt +
+                '}';
+    }
 
 }

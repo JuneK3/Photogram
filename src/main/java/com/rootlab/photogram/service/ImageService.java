@@ -61,8 +61,8 @@ public class ImageService {
         return images;
     }
 
+    @Transactional(readOnly = true)
     public List<Image> getPopularImages() {
-        List<Image> images = imageRepository.mPopular();
-        return images;
+        return imageRepository.mPopular();
     }
 }

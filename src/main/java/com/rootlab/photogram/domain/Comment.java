@@ -1,5 +1,6 @@
 package com.rootlab.photogram.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,6 +24,7 @@ public class Comment {
 
     @ManyToOne
     @JoinColumn(name = "userId")
+    @JsonIgnoreProperties(value = {"images"})
     private User user;
 
     @ManyToOne

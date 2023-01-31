@@ -59,16 +59,22 @@ function getStoryItem(image) {
 			<div class="sl__item__contents__content">
 				<p>${image.caption}</p>
 			</div>
-			<div id="storyCommentList-${image.id}">
-				<div class="sl__item__contents__comment" id="storyCommentItem-1"">
+			<div id="storyCommentList-${image.id}">`;
+
+	image.comments.forEach((comment) => {
+		item += `
+			<div class="sl__item__contents__comment" id="storyCommentItem-1"">
 				<p>
-					<b>Lovely :</b> 부럽습니다.
+					<b>${comment.user.username} :</b> ${comment.content}
 				</p>
 				<button>
 					<i class="fas fa-times"></i>
 				</button>
+			</div>`;
+	});
+
+	item += `
 			</div>
-		</div>
 			<div class="sl__item__input">
 				<input type="text" placeholder="댓글 달기..." id="storyCommentInput-${image.id}"/>
 				<button type="button" onClick="addComment(${image.id})">게시</button>
@@ -151,23 +157,26 @@ function addComment(imageId) {
 		data: JSON.stringify(data),
 		contentType: "application/json;charset=utf-8",
 		dataType: "json"
-	}).done(res=>{
+	}).done(res => {
 		console.log("성공", res);
-	}).fail(error=>{
+
+		let comment = res.payload;
+
+		let content = `
+			<div class="sl__item__contents__comment" id="storyCommentItem-${comment.id}""> 
+			<p>
+			  <b>${comment.user.username} :</b>
+			  ${comment.content}
+			</p>
+			<button><i class="fas fa-times"></i></button>
+		  </div>
+		`;
+		commentList.prepend(content);
+
+	}).fail(error => {
 		console.log("오류", error);
 	});
 
-	let content = `
-			  <div class="sl__item__contents__comment" id="storyCommentItem-2""> 
-			    <p>
-			      <b>GilDong :</b>
-			      댓글 샘플입니다.
-			    </p>
-			    <button><i class="fas fa-times"></i></button>
-			  </div>
-	`;
-
-	commentList.prepend(content);
 	commentInput.val("");
 }
 

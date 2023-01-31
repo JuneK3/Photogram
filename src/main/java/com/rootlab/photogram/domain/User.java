@@ -41,7 +41,7 @@ public class User {
     private String profileImageUrl; // 사진
     private String role; // 권한
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user")
     @JsonIgnoreProperties(value = {"user"}) // Image의 User부분을 json으로 파싱하지 않도록 설정
     private List<Image> images;
 

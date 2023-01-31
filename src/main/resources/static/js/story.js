@@ -178,7 +178,7 @@ function addComment(imageId) {
 		commentList.prepend(content);
 
 	}).fail(error => {
-		console.log("오류", error);
+		alert(error.responseJSON.payload.content);
 	});
 
 	commentInput.val("");

@@ -7,19 +7,27 @@ import com.rootlab.photogram.handler.exception.CustomException;
 import com.rootlab.photogram.repository.SubscribeRepository;
 import com.rootlab.photogram.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 public class UserService {
 
     private final UserRepository userRepository;
-
     private final SubscribeRepository subscribeRepository;
-
     private final PasswordEncoder passwordEncoder;
+
+    @Value("${file.path}")
+    private String uploadFolder;
 
     @Transactional
     public User updateUser(Long id, User user) {
@@ -56,5 +64,26 @@ public class UserService {
         user.getImages().forEach(image -> image.setLikeCount(image.getLikes().size()));
 
         return userProfileDto;
+    }
+
+    @Transactional
+    public User changeUserProfileImage(Long principalId, MultipartFile profileImageFile) {
+        UUID uuid = UUID.randomUUID();
+        String imageFileName = uuid + "_" + profileImageFile.getOriginalFilename(); // 1.jpg
+        System.out.println("이미지 파일이름 : " + imageFileName);
+
+        Path imageFilePath = Paths.get(uploadFolder + imageFileName);
+
+        try {
+            Files.write(imageFilePath, profileImageFile.getBytes());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        User userEntity = userRepository.findById(principalId)
+                .orElseThrow(() -> new CustomApiException("유저를 찾을 수 없습니다."));
+        userEntity.setProfileImageUrl(imageFileName);
+
+        return userEntity;
     }
 }

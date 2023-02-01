@@ -1,5 +1,7 @@
 package com.rootlab.photogram.config;
 
+import com.rootlab.photogram.config.oauth.OAuth2UserDetailsService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -8,7 +10,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    private final OAuth2UserDetailsService oAuth2UserDetailsService;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -27,6 +32,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/auth/signin") // GET
                 .loginProcessingUrl("/auth/signin") // POST UserDetailsService의 loadUserByUsername 호출
-                .defaultSuccessUrl("/");
+                .defaultSuccessUrl("/")
+                .and()
+                .oauth2Login()
+                .userInfoEndpoint()
+                .userService(oAuth2UserDetailsService);
     }
 }

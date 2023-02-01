@@ -1,0 +1,38 @@
+### 로그인 1
+POST http://localhost:8081/auth/signin
+Content-Type: application/x-www-form-urlencoded
+
+username=kim&password=1234
+
+### 메인 스토리 페이지
+GET http://localhost:8081/api/image
+
+### 로그아웃 1
+POST http://localhost:8081/logout
+
+### 구독하기 2
+POST http://localhost:8081/api/subscribe/2
+
+### 구독하기 3
+POST http://localhost:8081/api/subscribe/3
+
+### 구독취소 2
+DELETE http://localhost:8081/api/subscribe/2
+
+### 로그인 2
+POST http://localhost:8081/auth/signin
+Content-Type: application/x-www-form-urlencoded
+
+username=aaaa&password=aaaa
+
+### 구독하기 1
+POST http://localhost:8081/api/subscribe/1
+
+### 구독하기 2
+POST http://localhost:8081/api/subscribe/2
+
+### 좋아요 1
+POST http://localhost:8081/api/image/4/likes
+
+### 좋아요 취소 1
+DELETE http://localhost:8081/api/image/3/likes

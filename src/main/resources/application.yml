@@ -44,8 +44,8 @@ spring:
             client-id: ${FACEBOOK_CLIENT_ID}
             client-secret: ${FACEBOOK_CLIENT_SECRET}
             scope:
-              - public_profile
               - email
+              - public_profile
 
   servlet:
     multipart:

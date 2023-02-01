@@ -1,19 +1,16 @@
 package com.rootlab.photogram.config;
 
-import org.springframework.context.annotation.Bean;
+import com.rootlab.photogram.config.oauth.OAuth2UserDetailsService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+    private final OAuth2UserDetailsService oAuth2UserDetailsService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -27,6 +24,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/auth/signin") // GET
                 .loginProcessingUrl("/auth/signin") // POST UserDetailsService의 loadUserByUsername 호출
-                .defaultSuccessUrl("/");
+                .defaultSuccessUrl("/")
+                .and()
+                .oauth2Login()
+                .userInfoEndpoint()
+                .userService(oAuth2UserDetailsService);
     }
 }

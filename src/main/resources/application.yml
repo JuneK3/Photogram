@@ -22,8 +22,8 @@ spring:
     open-in-view: true # osiv 설정, default = true
     #    open-in-view: false # session이 서비스 레이어를 기준으로 닫히게 설정함
     hibernate:
-      ddl-auto: create
-#      ddl-auto: update
+#      ddl-auto: create
+      ddl-auto: update
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     show-sql: true

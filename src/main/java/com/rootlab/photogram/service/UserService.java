@@ -35,16 +35,14 @@ public class UserService {
                 .orElseThrow(() -> new CustomApiException("유저정보를 찾을 수 없습니다."));
         userEntity.setName(user.getName());
 
-        String password = user.getPassword();
-        String encodedPassword = passwordEncoder.encode(password);
+        String encodedPassword = passwordEncoder.encode(user.getPassword());
 
         userEntity.setPassword(encodedPassword);
         userEntity.setBio(user.getBio());
         userEntity.setWebsite(user.getWebsite());
         userEntity.setPhone(user.getPhone());
         userEntity.setGender(user.getGender());
-        User savedUser = userRepository.save(userEntity);
-        return savedUser;
+        return userRepository.save(userEntity);
     }
 
     @Transactional(readOnly = true) // 더티체킹x
@@ -54,7 +52,7 @@ public class UserService {
         Long subscribeState = subscribeRepository.mSubscribeState(principalId, pageUserId);
 
         UserProfileDto userProfileDto = UserProfileDto.builder()
-                .pageOwner(pageUserId.equals(principalId))
+                .pageOwnerState(pageUserId.equals(principalId))
                 .imageCount(user.getImages().size())
                 .user(user)
                 .subscribeState(subscribeState == 1)
@@ -69,9 +67,7 @@ public class UserService {
     @Transactional
     public User changeUserProfileImage(Long principalId, MultipartFile profileImageFile) {
         UUID uuid = UUID.randomUUID();
-        String imageFileName = uuid + "_" + profileImageFile.getOriginalFilename(); // 1.jpg
-        System.out.println("이미지 파일이름 : " + imageFileName);
-
+        String imageFileName = uuid + "_" + profileImageFile.getOriginalFilename();
         Path imageFilePath = Paths.get(uploadFolder + imageFileName);
 
         try {

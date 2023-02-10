@@ -1,7 +1,6 @@
 package com.rootlab.photogram.controller;
 
 import com.rootlab.photogram.config.auth.PrincipalDetails;
-import com.rootlab.photogram.domain.User;
 import com.rootlab.photogram.dto.user.UserProfileDto;
 import com.rootlab.photogram.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -21,8 +20,8 @@ public class UserController {
     public String profile(@PathVariable Long pageUserId, Model model,
                           @AuthenticationPrincipal PrincipalDetails principalDetails) {
         Long principalId = principalDetails.getUser().getId();
-        UserProfileDto userProfile = userService.getUserProfile(pageUserId, principalId);
-        model.addAttribute("profile", userProfile);
+        UserProfileDto dto = userService.getUserProfile(pageUserId, principalId);
+        model.addAttribute("dto", dto);
         return "user/profile";
     }
 

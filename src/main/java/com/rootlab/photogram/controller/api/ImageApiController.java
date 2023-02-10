@@ -46,6 +46,4 @@ public class ImageApiController {
         likesService.dislikes(imageId, principalDetails.getUser().getId());
         return new ResponseEntity<>(new CommonResponseDto<>(1, "좋아요 취소", null), HttpStatus.OK);
     }
-
-
 }

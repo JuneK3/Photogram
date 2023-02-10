@@ -16,13 +16,12 @@ import java.util.List;
 @Data
 @Entity
 public class Image {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String caption;
-    private String imageUrl;
+    private String postImageUrl;
 
     @ManyToOne
     @JoinColumn(name = "userId")

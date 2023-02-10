@@ -26,15 +26,14 @@ public class OAuth2UserDetailsService extends DefaultOAuth2UserService {
         OAuth2User oAuth2User = super.loadUser(userRequest);
         Map<String, Object> userInfo = oAuth2User.getAttributes();
 
-//        System.out.println(userInfo);
         String username = "facebook_" + userInfo.get("id");
         String password = passwordEncoder.encode(UUID.randomUUID().toString());
         String name = (String) userInfo.get("name");
         String email = (String) userInfo.get("email");
 
-        User user = userRepository.findByUsername(username);
-        if (user == null) {
-            User userEntity = User.builder()
+        User userEntity = userRepository.findByUsername(username);
+        if (userEntity == null) {
+            User user = User.builder()
                     .username(username)
                     .password(password)
                     .name(name)
@@ -42,8 +41,8 @@ public class OAuth2UserDetailsService extends DefaultOAuth2UserService {
                     .role("ROLE_USER")
                     .build();
 
-            return new PrincipalDetails(userRepository.save(userEntity), userInfo);
+            return new PrincipalDetails(userRepository.save(user), userInfo);
         }
-        return new PrincipalDetails(user, userInfo);
+        return new PrincipalDetails(userEntity, userInfo);
     }
 }

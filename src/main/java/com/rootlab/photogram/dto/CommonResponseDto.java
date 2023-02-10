@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 public class CommonResponseDto<T> {
     private int code; // 1: success, -1: fail
     private String message;
-    private T payload;
+    private T data;
 }

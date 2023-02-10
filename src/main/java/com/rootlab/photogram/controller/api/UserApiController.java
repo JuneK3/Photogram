@@ -46,16 +46,14 @@ public class UserApiController {
         return new ResponseEntity<>(new CommonResponseDto<>(1, "구독자 리스트 가져오기 성공", dtos), HttpStatus.OK);
     }
 
-
     @PutMapping("/api/user/{id}")
     public CommonResponseDto<User> update(
             @PathVariable Long id,
-            @Valid UserUpdateDto updateDto,
+            @Valid UserUpdateDto userUpdateDto,
             BindingResult bindingResult,
             @AuthenticationPrincipal PrincipalDetails principalDetails) {
-        User userEntity = updateDto.toEntity();
-        User updatedUser = userService.updateUser(id, userEntity);
-        principalDetails.setUser(updatedUser);
-        return new CommonResponseDto<>(1, "회원수정완료", updatedUser);
+        User userEntity = userService.updateUser(id, userUpdateDto.toEntity());
+        principalDetails.setUser(userEntity);
+        return new CommonResponseDto<>(1, "회원수정완료", userEntity);
     }
 }

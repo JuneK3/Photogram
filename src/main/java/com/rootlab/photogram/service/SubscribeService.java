@@ -17,7 +17,6 @@ import java.util.List;
 public class SubscribeService {
 
     private final SubscribeRepository subscribeRepository;
-
     private final EntityManager em;
 
     @Transactional
@@ -59,7 +58,6 @@ public class SubscribeService {
         
         // dto에 query 결과를 mapping하기 위해 qlrm 라이브러리가 필요
         JpaResultMapper resultMapper = new JpaResultMapper();
-        List<SubscribeDto> dtos = resultMapper.list(query, SubscribeDto.class);
-        return dtos;
+        return resultMapper.list(query, SubscribeDto.class);
     }
 }

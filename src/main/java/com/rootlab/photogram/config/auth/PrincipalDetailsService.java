@@ -3,8 +3,6 @@ package com.rootlab.photogram.config.auth;
 import com.rootlab.photogram.domain.User;
 import com.rootlab.photogram.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -14,8 +12,6 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class PrincipalDetailsService implements UserDetailsService {
 
-    Logger log = LoggerFactory.getLogger(PrincipalDetailsService.class);
-
     private final UserRepository userRepository;
 
     // password 자동 matching: DaoAuthenticationProvider에서 password match
@@ -23,9 +19,12 @@ public class PrincipalDetailsService implements UserDetailsService {
     // loadUserByUsername 성공시 세션 생성
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        log.info("[PrincipalDetailsService] loadUserByUsername 호출");
-//        User user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("유저 정보가 존재하지 않습니다."));
-        User user = userRepository.findByUsername(username);
-        return new PrincipalDetails(user);
+//        User userEntity = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("유저 정보가 존재하지 않습니다."));
+        User userEntity = userRepository.findByUsername(username);
+        if (userEntity == null) {
+            return null;
+        } else {
+            return new PrincipalDetails(userEntity);
+        }
     }
 }

@@ -55,7 +55,6 @@ public class ImageService {
                     image.setLikeState(true);
                 }
             });
-
         });
 
         return images;

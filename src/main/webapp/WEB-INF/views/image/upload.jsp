@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
+         pageEncoding="UTF-8"%>
 
 <%@ include file="../layout/header.jsp" %>
 
@@ -19,14 +19,14 @@
 
         <!--사진업로드 Form-->
         <form class="upload-form" action="/image" method="post" enctype="multipart/form-data">
-            <input type="file" name="file" onchange="imageChoose(this)"/>
+            <input  type="file" name="file"  onchange="imageChoose(this)" />
             <div class="upload-img">
-                <img src="/images/person.jpeg" alt="" id="imageUploadPreview"/>
+                <img src="/images/person.jpeg" alt="" id="imageUploadPreview" />
             </div>
 
             <!--사진설명 + 업로드버튼-->
             <div class="upload-form-detail">
-                <input type="text" placeholder="사진설명" name="caption" required="required">
+                <input type="text" placeholder="사진설명" name="caption" />
                 <button class="cta blue">업로드</button>
             </div>
             <!--사진설명end-->
@@ -38,5 +38,5 @@
 </main>
 <br/><br/>
 
-<script src="/js/upload.js"></script>
+<script src="/js/upload.js" ></script>
 <%@ include file="../layout/footer.jsp" %>

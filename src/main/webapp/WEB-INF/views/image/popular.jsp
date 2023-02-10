@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
-<%@ include file="../layout/header.jsp" %>
+         pageEncoding="UTF-8"%>
+<%@ include file="../layout/header.jsp"%>
 
 <!--인기 게시글-->
 <main class="popular">
@@ -11,7 +11,7 @@
 
             <c:forEach var="image" items="${images}">
                 <div class="p-img-box">
-                    <a href="/user/${image.user.id}"> <img src="/upload/${image.imageUrl}"/>
+                    <a href="/user/${image.user.id}"> <img src="/upload/${image.postImageUrl}" />
                     </a>
                 </div>
             </c:forEach>
@@ -21,5 +21,5 @@
     </div>
 </main>
 
-<%@ include file="../layout/footer.jsp" %>
+<%@ include file="../layout/footer.jsp"%>
 

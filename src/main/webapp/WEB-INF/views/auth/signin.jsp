@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
+         pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +9,7 @@
     <title>Photogram</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-          integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+          integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 </head>
 
 <body>
@@ -24,10 +24,9 @@
                     <h1><img src="/images/logo.jpg" alt=""></h1>
 
                     <!--로그인 인풋-->
-                    <form class="login__input" action="/auth/signin" , method="post">
-                        <input type="hidden" name="${ _csrf.parameterName }" value="${ _csrf.token }">
-                        <input type="text" name="username" placeholder="유저네임" required="required"/>
-                        <input type="password" name="password" placeholder="비밀번호" required="required"/>
+                    <form class="login__input"  action="/auth/signin" method="POST">
+                        <input type="text" name="username" placeholder="유저네임" required="required" />
+                        <input type="password" name="password" placeholder="비밀번호" required="required" />
                         <button>로그인</button>
                     </form>
                     <!--로그인 인풋end-->
